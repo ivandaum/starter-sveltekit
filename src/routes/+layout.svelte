@@ -1,6 +1,6 @@
 <script>
 	import '$lib/styles/index.scss';
-	import Header from '$lib/components/header.svelte';
+	import Header from '$lib/components/organism/header.svelte';
 
 	let { children } = $props();
 </script>

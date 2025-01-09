@@ -4,5 +4,9 @@ export type ComponentProps = {
 };
 
 export type BoxProps = ComponentProps & {
-	center: boolean;
+	center?: boolean;
+	height?: boolean;
+	width?: boolean;
+	justify?: boolean;
+	absolute?: boolean;
 };
