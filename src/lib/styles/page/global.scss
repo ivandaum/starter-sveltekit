@@ -9,8 +9,8 @@ body {
 	font-size: 1.6rem;
 	line-height: 1.5;
 	font-weight: normal;
-	background-color: #ffffff;
-	color: #000;
+	background-color: var(--color-white);
+	color: var(--color-black);
 }
 
 .disabled,
