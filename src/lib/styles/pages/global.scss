@@ -1,0 +1,19 @@
+@use '../mixins.scss';
+
+html {
+	font-size: 10px;
+}
+
+body {
+	margin: 0;
+	font-size: 1.6rem;
+	line-height: 1.5;
+	font-weight: normal;
+	background-color: #ffffff;
+	color: #000;
+}
+
+.disabled,
+*[disabled] {
+	@include mixins.disabled;
+}
