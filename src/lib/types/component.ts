@@ -10,3 +10,10 @@ export type BoxProps = ComponentProps & {
 	justify?: boolean;
 	absolute?: boolean;
 };
+
+export type RectProps = {
+	x: number;
+	y: number;
+	width: number;
+	height: number;
+};

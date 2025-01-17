@@ -1,5 +1,6 @@
-import type { SiteConfig } from '$lib/types/store';
+import { writable } from 'svelte/store';
 
-export const SiteStore = $state<SiteConfig>({
-	title: ''
-});
+export const isTablet = writable(false);
+export const mouse = writable([0, 0]);
+export const windowWidth = writable(0);
+export const windowHeight = writable(0);
