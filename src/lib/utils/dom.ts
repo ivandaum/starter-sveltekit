@@ -1,5 +1,9 @@
 import type { ObserverProps } from '$lib/types/utils';
 
+export const getScrollTop = () => {
+	return window.scrollY || document.documentElement.scrollTop;
+};
+
 export const observer = ({
 	element,
 	onShow,
@@ -19,6 +23,7 @@ export const observer = ({
 		},
 		{ threshold, rootMargin }
 	);
+
 	observer.observe(element);
 
 	return observer;

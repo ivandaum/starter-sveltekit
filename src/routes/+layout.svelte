@@ -1,9 +1,11 @@
 <script lang="ts">
 	import '$lib/styles/index.scss';
 
+	import { EventManager } from '$lib/utils/managers/event-manager';
+
 	import { onMount } from 'svelte';
 
-	import { isTablet, windowHeight, windowWidth, mouse } from '$lib/stores/site.svelte';
+	import { isTablet, windowHeight, windowWidth } from '$lib/stores/site.svelte';
 
 	import Header from '$lib/components/organisms/header.svelte';
 
@@ -12,26 +14,22 @@
 	const onResize = () => {
 		const height = window.innerHeight;
 		const width = window.innerWidth;
-		document.documentElement.style.setProperty('--vh', `${height * 0.01}px`);
 
 		$isTablet = width < 1024;
 		$windowWidth = width;
 		$windowHeight = height;
-	};
 
-	const onMouseMove = ({ clientX, clientY }: { clientX: number; clientY: number }) => {
-		$mouse = [clientX, clientY];
+		console.log('resize', width, height);
 	};
 
 	onMount(() => {
 		onResize();
 
-		window.addEventListener('resize', onResize);
-		window.addEventListener('mousemove', onMouseMove);
+		const event = EventManager.getInstance();
+		const eventId = event.add('resize', onResize);
 
 		return () => {
-			window.removeEventListener('resize', onResize);
-			window.removeEventListener('mousemove', onMouseMove);
+			event.remove(eventId);
 		};
 	});
 </script>

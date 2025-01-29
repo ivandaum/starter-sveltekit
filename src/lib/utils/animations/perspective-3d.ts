@@ -4,9 +4,8 @@ import { get } from 'svelte/store';
 import type { Perspective3dProps } from '$lib/types/utils';
 import type { RectProps } from '$lib/types/component';
 
-import { getScrollTop } from '$lib/utils/scroll';
+import { getScrollTop, observer } from '$lib/utils/dom';
 import { normalize, round } from '$lib/utils/math';
-import { observer } from '$lib/utils/observer';
 
 export const perspective3d = ({
 	container,
@@ -21,8 +20,6 @@ export const perspective3d = ({
 
 	const elementRects: RectProps[] = [];
 	const elementSpeeds: [number, number][] = [];
-
-	console.log('proximity', proximity);
 
 	const update = () => {
 		const scrollTop = getScrollTop();

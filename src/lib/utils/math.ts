@@ -5,3 +5,5 @@ export const normalize = (value: number, min: number, max: number) => {
 export const round = (value: number, decimals: number = 2) => {
 	return parseFloat(Number(value).toFixed(decimals));
 };
+
+export const uniqueID = () => crypto.randomUUID();
