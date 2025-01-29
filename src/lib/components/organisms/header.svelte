@@ -3,7 +3,7 @@
 </script>
 
 <div class="header">
-	<Box center height>Svelte starter</Box>
+	<Box x y height>Svelte starter</Box>
 </div>
 
 <style lang="scss">

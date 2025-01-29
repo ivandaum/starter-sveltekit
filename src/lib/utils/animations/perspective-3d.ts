@@ -70,8 +70,8 @@ export const perspective3d = ({
 			elementSpeeds[i][0] += (dx - elementSpeeds[i][0]) * 0.05;
 			elementSpeeds[i][1] += (dy - elementSpeeds[i][1]) * 0.05;
 
-			elements[i].style.setProperty('--tx', elementSpeeds[i][0].toString());
-			elements[i].style.setProperty('--ty', elementSpeeds[i][1].toString());
+			elements[i].style.setProperty('--tx', round(elementSpeeds[i][0]).toString());
+			elements[i].style.setProperty('--ty', round(elementSpeeds[i][1]).toString());
 		});
 	};
 

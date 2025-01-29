@@ -15,8 +15,8 @@
 </script>
 
 <div class="welcome">
-	<Box width height class="content" center absolute>
-		<Box class="block" center bind:node={elementRef}>
+	<Box class="content" width height x y position="absolute">
+		<Box bind:node={elementRef} class="block" x y>
 			{@html SvelteIcon}
 		</Box>
 	</Box>

@@ -6,11 +6,12 @@ export type ComponentProps = {
 };
 
 export type BoxProps = ComponentProps & {
-	center?: boolean;
-	height?: boolean;
+	height?: 'fit' | true;
 	width?: boolean;
-	justify?: boolean;
-	absolute?: boolean;
+	grid?: boolean;
+	x?: 'start' | 'center' | 'justify' | 'end' | true;
+	y?: 'start' | 'center' | 'justify' | 'end' | true;
+	position?: 'relative' | 'absolute' | 'fixed';
 };
 
 export type RectProps = {
