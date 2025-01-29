@@ -1,14 +1,15 @@
 import { uniqueID } from '$lib/utils/math';
 
-type Callback = () => void;
-type CallbackID = string;
-type EventName = string;
+export type EventManagerCallback = (event: any | undefined) => void;
+export type EventManagerCallbackID = string;
+
+export type EventManagerEventName = keyof WindowEventMap;
 
 export class EventManager {
 	static instance: EventManager | undefined;
 
-	events: Map<EventName, Array<CallbackID>> = new Map();
-	callbacks: Map<CallbackID, Callback> = new Map();
+	events: Map<EventManagerEventName, Array<EventManagerCallbackID>> = new Map();
+	EventManagerCallbacks: Map<EventManagerCallbackID, EventManagerCallback> = new Map();
 
 	constructor() {
 		if (EventManager.instance) {
@@ -16,7 +17,7 @@ export class EventManager {
 		}
 
 		EventManager.instance = this;
-		this.callbacks = new Map();
+		this.EventManagerCallbacks = new Map();
 	}
 
 	static getInstance() {
@@ -27,8 +28,8 @@ export class EventManager {
 		return EventManager.instance;
 	}
 
-	#getEvent(eventName: EventName): Array<CallbackID> {
-		const event = this.events.get(eventName) as Array<CallbackID>;
+	#getEvent(eventName: EventManagerEventName): Array<EventManagerCallbackID> {
+		const event = this.events.get(eventName) as Array<EventManagerCallbackID>;
 
 		if (!event) {
 			return [];
@@ -37,32 +38,35 @@ export class EventManager {
 		return event;
 	}
 
-	#createEvent(eventName: EventName) {
-		const c = () => {
+	#createEvent(eventName: EventManagerEventName) {
+		const c = (event: Event) => {
 			const ids = this.events.get(eventName);
-			ids?.forEach((id: CallbackID) => this.callbacks.get(id)?.());
+			ids?.forEach((id: EventManagerCallbackID) => this.EventManagerCallbacks.get(id)?.(event));
 		};
 
 		window.addEventListener(eventName, c);
 		this.events.set(eventName, []);
 	}
 
-	add(eventName: EventName, callback: () => void): CallbackID {
+	add(
+		eventName: EventManagerEventName,
+		EventManagerCallback: EventManagerCallback
+	): EventManagerCallbackID {
 		if (!this.events.has(eventName)) {
 			this.#createEvent(eventName);
 		}
 
-		const callbackId = uniqueID();
-		this.callbacks.set(callbackId, callback);
+		const EventManagerCallbackId = uniqueID();
+		this.EventManagerCallbacks.set(EventManagerCallbackId, EventManagerCallback);
 
 		const event = this.#getEvent(eventName);
-		this.events.set(eventName, event.concat(callbackId));
+		this.events.set(eventName, event.concat(EventManagerCallbackId));
 
-		return callbackId;
+		return EventManagerCallbackId;
 	}
 
-	remove(callbackId: CallbackID) {
-		this.callbacks.delete(callbackId);
+	remove(EventManagerCallbackId: EventManagerCallbackID) {
+		this.EventManagerCallbacks.delete(EventManagerCallbackId);
 
 		const events = this.events.entries().toArray();
 
@@ -71,7 +75,7 @@ export class EventManager {
 
 			for (let j = 0; j < event.length; j++) {
 				const id = event[j];
-				if (id === callbackId) {
+				if (id === EventManagerCallbackId) {
 					event.splice(j, 1);
 					this.events.set(eventName, event);
 					break;

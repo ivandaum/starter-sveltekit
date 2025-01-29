@@ -1,5 +1,5 @@
 @use './mixins.scss';
+@use './page/root-vars.scss';
 @use './page/reset.scss';
 @use './page/global.scss';
-@use './root/color.scss';
-@use './root/z-index.scss';
+@use './page/fonts.scss';

@@ -1,10 +1,12 @@
 <script lang="ts">
 	import type { BoxProps } from '$lib/types/component';
 
-	const props: BoxProps = $props();
+	let { node = $bindable(), ...props }: BoxProps = $props();
 </script>
 
-<div
+<svelte:element
+	this={props.type || 'div'}
+	bind:this={node}
 	class={[
 		'box',
 		props.class,
@@ -18,7 +20,7 @@
 	]}
 >
 	{@render props.children?.()}
-</div>
+</svelte:element>
 
 <style lang="scss">
 	.box {

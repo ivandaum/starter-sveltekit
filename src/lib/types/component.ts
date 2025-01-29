@@ -1,6 +1,8 @@
 export type ComponentProps = {
 	class?: object | string | string[];
 	children?: any;
+	type?: string;
+	node?: HTMLElement;
 };
 
 export type BoxProps = ComponentProps & {

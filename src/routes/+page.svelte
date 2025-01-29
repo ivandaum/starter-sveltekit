@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Box from '$lib/components/atoms/box.svelte';
+	import Welcome from '$lib/components/welcome.svelte';
 </script>
 
-<Box center>This the the homepage</Box>
+<Welcome />

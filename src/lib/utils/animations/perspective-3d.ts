@@ -1,23 +1,31 @@
-import { mouse, isTablet, windowHeight, windowWidth } from '$lib/stores/site.svelte';
 import { get } from 'svelte/store';
 
 import type { Perspective3dProps } from '$lib/types/utils';
 import type { RectProps } from '$lib/types/component';
 
+import { mouse, isTablet, windowHeight, windowWidth } from '$lib/stores/site.svelte';
+
+import { EventManager, type EventManagerCallbackID } from '$lib/utils/managers/event-manager';
+import RAFManager from '$lib/utils/managers/raf-manager';
+
 import { getScrollTop, observer } from '$lib/utils/dom';
-import { normalize, round } from '$lib/utils/math';
+import { normalize, round, uniqueID } from '$lib/utils/math';
 
 export const perspective3d = ({
 	container,
-	elements,
+	elements = [container],
 	proximity = false,
 	proximityLimit = 1.5,
 	onShow,
 	onHide
 }: Perspective3dProps) => {
-	let raf = 0,
-		observerId: IntersectionObserver;
+	const eventManager = EventManager.getInstance();
+	const rafManager = RAFManager.getInstance();
 
+	let observerId: IntersectionObserver;
+	let eventId: EventManagerCallbackID;
+
+	const rafId = uniqueID();
 	const elementRects: RectProps[] = [];
 	const elementSpeeds: [number, number][] = [];
 
@@ -65,8 +73,6 @@ export const perspective3d = ({
 			elements[i].style.setProperty('--tx', elementSpeeds[i][0].toString());
 			elements[i].style.setProperty('--ty', elementSpeeds[i][1].toString());
 		});
-
-		raf = requestAnimationFrame(() => update());
 	};
 
 	const onResize = () => {
@@ -87,17 +93,17 @@ export const perspective3d = ({
 	return {
 		init: () => {
 			onResize();
-			window.addEventListener('resize', onResize);
+			eventId = eventManager.add('resize', onResize);
 
 			observerId = observer({
 				element: container,
 				onShow: () => {
 					if (onShow) onShow();
-					update();
+					rafManager.add(rafId, update);
 				},
 				onHide: () => {
 					if (onHide) onHide();
-					cancelAnimationFrame(raf);
+					rafManager.remove(rafId);
 				}
 			});
 		},
@@ -106,11 +112,9 @@ export const perspective3d = ({
 				observerId.disconnect();
 			}
 
-			if (raf) {
-				cancelAnimationFrame(raf);
-			}
+			if (rafId) rafManager.remove(rafId);
 
-			window.removeEventListener('resize', onResize);
+			if (eventId) eventManager.remove(eventId);
 		}
 	};
 };

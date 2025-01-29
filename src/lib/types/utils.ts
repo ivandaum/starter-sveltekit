@@ -8,9 +8,11 @@ export type ObserverProps = {
 
 export type Perspective3dProps = {
 	container: HTMLElement;
-	elements: HTMLElement[];
+	elements?: HTMLElement[];
+	// events
 	onShow?: () => void;
 	onHide?: () => void;
+	// animation purpose
 	proximity?: boolean;
 	proximityLimit?: number;
 };

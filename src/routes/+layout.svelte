@@ -5,7 +5,7 @@
 
 	import { onMount } from 'svelte';
 
-	import { isTablet, windowHeight, windowWidth } from '$lib/stores/site.svelte';
+	import { isTablet, windowHeight, windowWidth, mouse } from '$lib/stores/site.svelte';
 
 	import Header from '$lib/components/organisms/header.svelte';
 
@@ -18,18 +18,20 @@
 		$isTablet = width < 1024;
 		$windowWidth = width;
 		$windowHeight = height;
+	};
 
-		console.log('resize', width, height);
+	const onMouseMove = (event: MouseEvent) => {
+		$mouse = [event.clientX, event.clientY];
 	};
 
 	onMount(() => {
 		onResize();
 
 		const event = EventManager.getInstance();
-		const eventId = event.add('resize', onResize);
+		const events = [event.add('resize', onResize), event.add('mousemove', onMouseMove)];
 
 		return () => {
-			event.remove(eventId);
+			events.forEach((id) => event.remove(id));
 		};
 	});
 </script>
@@ -40,8 +42,10 @@
 </div>
 
 <style lang="scss">
+	@use '$lib/styles/mixins';
+
 	.page {
-		min-height: 100vh;
+		min-height: mixins.vh(100);
 		width: 100%;
 	}
 </style>

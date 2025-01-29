@@ -1,4 +1,5 @@
 @use '../mixins.scss';
+@use '../responsive.scss';
 
 html {
 	font-size: 10px;
@@ -8,12 +9,47 @@ body {
 	margin: 0;
 	font-size: 1.6rem;
 	line-height: 1.5;
-	font-weight: normal;
 	background-color: var(--color-white);
 	color: var(--color-black);
+	font-family: var(--font-text);
+	font-weight: var(--font-regular);
+
+	@include responsive.tablet {
+		overflow-y: scroll;
+		overflow-x: hidden;
+		width: 100vw;
+	}
+}
+
+html,
+body {
+	overscroll-behavior: none;
+}
+
+strong,
+b {
+	font-weight: var(--font-bold);
 }
 
 .disabled,
 *[disabled] {
 	@include mixins.disabled;
+}
+
+.hidden-tablet {
+	@include responsive.tablet {
+		display: none !important;
+	}
+}
+
+.hidden-desktop {
+	@include responsive.desktop {
+		display: none !important;
+	}
+}
+
+.break-desktop {
+	@include responsive.desktop {
+		display: block !important;
+	}
 }
