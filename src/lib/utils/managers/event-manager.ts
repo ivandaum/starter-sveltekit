@@ -1,9 +1,10 @@
+import type {
+	EventManagerCallback,
+	EventManagerCallbackID,
+	EventManagerEventName
+} from '$lib/types/utils';
+
 import { uniqueID } from '$lib/utils/math';
-
-export type EventManagerCallback = (event: any | undefined) => void;
-export type EventManagerCallbackID = string;
-
-export type EventManagerEventName = keyof WindowEventMap;
 
 export class EventManager {
 	static instance: EventManager | undefined;
@@ -48,25 +49,22 @@ export class EventManager {
 		this.events.set(eventName, []);
 	}
 
-	add(
-		eventName: EventManagerEventName,
-		EventManagerCallback: EventManagerCallback
-	): EventManagerCallbackID {
+	add(eventName: EventManagerEventName, callback: EventManagerCallback): EventManagerCallbackID {
 		if (!this.events.has(eventName)) {
 			this.#createEvent(eventName);
 		}
 
-		const EventManagerCallbackId = uniqueID();
-		this.EventManagerCallbacks.set(EventManagerCallbackId, EventManagerCallback);
+		const id = uniqueID();
+		this.EventManagerCallbacks.set(id, callback);
 
 		const event = this.#getEvent(eventName);
-		this.events.set(eventName, event.concat(EventManagerCallbackId));
+		this.events.set(eventName, event.concat(id));
 
-		return EventManagerCallbackId;
+		return id;
 	}
 
-	remove(EventManagerCallbackId: EventManagerCallbackID) {
-		this.EventManagerCallbacks.delete(EventManagerCallbackId);
+	remove(callbackId: EventManagerCallbackID) {
+		this.EventManagerCallbacks.delete(callbackId);
 
 		const events = this.events.entries().toArray();
 
@@ -75,7 +73,7 @@ export class EventManager {
 
 			for (let j = 0; j < event.length; j++) {
 				const id = event[j];
-				if (id === EventManagerCallbackId) {
+				if (id === callbackId) {
 					event.splice(j, 1);
 					this.events.set(eventName, event);
 					break;

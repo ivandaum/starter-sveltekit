@@ -1,11 +1,11 @@
 import { get } from 'svelte/store';
 
-import type { Perspective3dProps } from '$lib/types/utils';
+import type { Perspective3dProps, EventManagerCallbackID } from '$lib/types/utils';
 import type { RectProps } from '$lib/types/component';
 
 import { mouse, isTablet, windowHeight, windowWidth } from '$lib/stores/site.svelte';
 
-import { EventManager, type EventManagerCallbackID } from '$lib/utils/managers/event-manager';
+import { EventManager } from '$lib/utils/managers/event-manager';
 import RAFManager from '$lib/utils/managers/raf-manager';
 
 import { getScrollTop, observer } from '$lib/utils/dom';

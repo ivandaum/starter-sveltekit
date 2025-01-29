@@ -16,3 +16,7 @@ export type Perspective3dProps = {
 	proximity?: boolean;
 	proximityLimit?: number;
 };
+
+export type EventManagerCallback = (event: any | undefined) => void;
+export type EventManagerCallbackID = string;
+export type EventManagerEventName = keyof WindowEventMap;
