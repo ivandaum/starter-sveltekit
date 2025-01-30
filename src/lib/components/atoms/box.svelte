@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { BoxProps } from '$lib/types/component';
 
-	import { classNames } from '$lib/utils/classnames';
+	import { classNames } from '$lib/utils/classnames.svelte';
 
 	let {
 		node = $bindable(),
@@ -14,15 +14,14 @@
 		...props
 	}: BoxProps = $props();
 
-	const { classList, validate, add } = classNames();
-
-	validate(x, `x-${x}`, 'x-center');
-	validate(y, `y-${y}`, 'y-center');
-	validate(height, `h-${height}`, 'h-100');
-	validate(width, null, 'w-100');
-	validate(column, null, 'column');
-
-	add(position);
+	const classList = $derived([
+		classNames(x, `x-${x}`, 'x-center'),
+		classNames(y, `y-${y}`, 'y-center'),
+		classNames(height, `h-${height}`, 'h-100'),
+		classNames(width, 'w-100'),
+		classNames(column, 'column'),
+		position
+	]);
 </script>
 
 <svelte:element this={props.type || 'div'} bind:this={node} class={['b', classList, props.class]}>

@@ -17,4 +17,5 @@ export type BoxProps = ComponentProps & {
 
 export type TextProps = ComponentProps & {
 	align?: 'left' | 'center' | 'right' | 'justify';
+	title?: boolean;
 };

@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 
+	import { isTablet } from '$lib/stores/site.svelte';
+
 	import { perspective3d } from '$lib/utils/animations/perspective-3d';
 
 	import SvelteIcon from '$lib/assets/icons/svelte-logo.svg?raw';
@@ -24,7 +26,7 @@
 	<Box class="content" x y position="absolute">
 		<Box bind:node={elementRef} class="block" x y column>
 			{@html SvelteIcon}
-			<Text align="center" class="text">The quick brown fox jumps over the lazy dog</Text>
+			<Text title={!$isTablet} align="center" class="text">Svelte 5 starter</Text>
 		</Box>
 	</Box>
 </div>
@@ -45,11 +47,6 @@
 
 	.welcome :global {
 		color: var(--black);
-		font-size: 3rem;
-
-		@include responsive.tablet {
-			font-size: 2rem;
-		}
 
 		.content {
 			height: mixins.vh(100);
@@ -63,17 +60,11 @@
 
 		.block {
 			width: mixins.vh(25);
+			height: auto;
 			border-radius: 2rem;
 			padding: 5rem 3rem;
 			background: var(--color-white);
 			box-shadow: 0 0 5rem rgba(0, 0, 0, 0.1);
-
-			@include responsive.tablet {
-				width: 100%;
-				padding: 5rem 2rem;
-			}
-
-			// animations
 			transform-style: preserve-3d;
 			transform-origin: center center;
 			transform: translate3d(
@@ -82,6 +73,11 @@
 					0px
 				)
 				perspective(500px) rotateY(calc(var(--tx) * 5deg)) rotateX(calc(var(--ty) * -5deg));
+
+			@include responsive.tablet {
+				width: 100%;
+				padding: 5rem 2rem;
+			}
 		}
 
 		.text {

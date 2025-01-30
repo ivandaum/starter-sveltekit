@@ -1,13 +1,11 @@
 <script lang="ts">
 	import type { TextProps } from '$lib/types/component';
 
-	import { classNames } from '$lib/utils/classnames';
+	import { classNames } from '$lib/utils/classnames.svelte';
 
-	let { node = $bindable(), align, ...props }: TextProps = $props();
+	let { node = $bindable(), align, title, ...props }: TextProps = $props();
 
-	const { classList, validate } = classNames();
-
-	validate(align, `align-${align}`);
+	const classList = $derived([classNames(align, `align-${align}`), classNames(title, 'title')]);
 </script>
 
 <svelte:element this={props.type || 'p'} bind:this={node} class={['t', classList, props.class]}>
@@ -16,22 +14,27 @@
 
 <style lang="scss">
 	.t {
-		font-size: inherit;
+		font-size: var(--font-size-text);
 		color: inherit;
 
 		:global {
 			b {
-				font-weight: bold;
+				font-weight: var(--font-weight-bold);
 			}
 
 			strong {
-				font-weight: bold;
+				font-weight: var(--font-weight-bold);
 			}
+
 			a {
 				color: inherit;
 				text-decoration: underline;
 			}
 		}
+	}
+
+	.t.title {
+		font-size: var(--font-size-title);
 	}
 
 	.t.align {

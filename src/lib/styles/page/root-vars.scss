@@ -1,9 +1,12 @@
 :root {
 	// fonts
-	--font-text: 'DM Sans', arial, sans-serif;
-	--font-title: 'Unbounded';
-	--font-regular: 400;
-	--font-bold: 600;
+	--font-family-text: 'DM Sans', arial, sans-serif;
+
+	--font-weight-regular: 400;
+	--font-weight-bold: 600;
+
+	--font-size-title: 2.4rem;
+	--font-size-text: 1.6rem;
 
 	// colors
 	--color-white: #ffffff;
