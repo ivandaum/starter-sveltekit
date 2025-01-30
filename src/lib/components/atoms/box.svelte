@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { BoxProps } from '$lib/types/component';
 
-	import { classNames } from '$lib/utils/classnames.svelte';
+	import { classNames } from '$lib/utils/classnames';
 
 	let {
 		node = $bindable(),

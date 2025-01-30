@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { TextProps } from '$lib/types/component';
 
-	import { classNames } from '$lib/utils/classnames.svelte';
+	import { classNames } from '$lib/utils/classnames';
 
 	let { node = $bindable(), align, title, ...props }: TextProps = $props();
 
