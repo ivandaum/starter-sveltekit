@@ -9,14 +9,12 @@ export type BoxProps = ComponentProps & {
 	height?: 'fit' | true;
 	width?: boolean;
 	grid?: boolean;
+	column?: boolean;
 	x?: 'start' | 'center' | 'justify' | 'end' | true;
 	y?: 'start' | 'center' | 'justify' | 'end' | true;
 	position?: 'relative' | 'absolute' | 'fixed';
 };
 
-export type RectProps = {
-	x: number;
-	y: number;
-	width: number;
-	height: number;
+export type TextProps = ComponentProps & {
+	align?: 'left' | 'center' | 'right' | 'justify';
 };

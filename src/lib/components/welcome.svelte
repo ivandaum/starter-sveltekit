@@ -4,7 +4,9 @@
 	import { perspective3d } from '$lib/utils/animations/perspective-3d';
 
 	import SvelteIcon from '$lib/assets/icons/svelte-logo.svg?raw';
+
 	import Box from '$lib/components/atoms/box.svelte';
+	import Text from '$lib/components/atoms/text.svelte';
 
 	let elementRef: HTMLDivElement;
 
@@ -15,9 +17,10 @@
 </script>
 
 <div class="welcome">
-	<Box class="content" width height x y position="absolute">
-		<Box bind:node={elementRef} class="block" x y>
+	<Box class="content" x y position="absolute">
+		<Box bind:node={elementRef} class="block" x y column>
 			{@html SvelteIcon}
+			<Text align="center" class="text">The quick brown fox jumps over the lazy dog</Text>
 		</Box>
 	</Box>
 </div>
@@ -36,7 +39,7 @@
 	}
 
 	.welcome :global {
-		color: var(--brown);
+		color: var(--black);
 		font-size: 3rem;
 
 		.content {
@@ -46,9 +49,10 @@
 		}
 
 		.block {
-			aspect-ratio: 1;
+			aspect-ratio: 0.75;
 			width: mixins.vh(25);
 			border-radius: 2rem;
+			padding: 3rem;
 			background: var(--color-white);
 			box-shadow: 0 0 5rem rgba(0, 0, 0, 0.1);
 
@@ -61,6 +65,10 @@
 					0px
 				)
 				perspective(500px) rotateY(calc(var(--tx) * 5deg)) rotateX(calc(var(--ty) * -5deg));
+		}
+
+		.text {
+			margin-top: 3rem;
 		}
 
 		svg {

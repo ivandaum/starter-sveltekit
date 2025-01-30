@@ -1,3 +1,10 @@
+export type RectProps = {
+	x: number;
+	y: number;
+	width: number;
+	height: number;
+};
+
 export type ObserverProps = {
 	element: HTMLElement;
 	onShow: () => void;

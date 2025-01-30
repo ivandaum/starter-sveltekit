@@ -1,15 +1,9 @@
 <script lang="ts">
-	import Box from '$lib/components/atoms/box.svelte';
 </script>
 
-<div class="header">
-	<Box x y height>Svelte starter</Box>
-</div>
+<div class="header"></div>
 
 <style lang="scss">
 	.header {
-		width: 100%;
-		height: 5rem;
-		font-size: 2rem;
 	}
 </style>

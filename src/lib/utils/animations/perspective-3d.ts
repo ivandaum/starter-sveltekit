@@ -1,7 +1,6 @@
 import { get } from 'svelte/store';
 
-import type { Perspective3dProps, EventManagerCallbackID } from '$lib/types/utils';
-import type { RectProps } from '$lib/types/component';
+import type { RectProps, Perspective3dProps, EventManagerCallbackID } from '$lib/types/utils';
 
 import { mouse, isTablet, windowHeight, windowWidth } from '$lib/stores/site.svelte';
 
