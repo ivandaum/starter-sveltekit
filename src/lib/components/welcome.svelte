@@ -27,6 +27,7 @@
 
 <style lang="scss">
 	@use '$lib/styles/mixins';
+	@use '$lib/styles/responsive';
 
 	$translate: 0.5rem;
 
@@ -42,19 +43,31 @@
 		color: var(--black);
 		font-size: 3rem;
 
+		@include responsive.tablet {
+			font-size: 2rem;
+		}
+
 		.content {
 			height: mixins.vh(100);
 			width: 100%;
 			overflow: hidden;
+
+			@include responsive.tablet {
+				padding: 2rem;
+			}
 		}
 
 		.block {
-			aspect-ratio: 0.75;
 			width: mixins.vh(25);
 			border-radius: 2rem;
-			padding: 3rem;
+			padding: 5rem 3rem;
 			background: var(--color-white);
 			box-shadow: 0 0 5rem rgba(0, 0, 0, 0.1);
+
+			@include responsive.tablet {
+				width: 100%;
+				padding: 5rem 2rem;
+			}
 
 			// animations
 			transform-style: preserve-3d;
@@ -69,6 +82,10 @@
 
 		.text {
 			margin-top: 3rem;
+
+			@include responsive.tablet {
+				margin-top: 5rem;
+			}
 		}
 
 		svg {
@@ -80,6 +97,10 @@
 				calc(var(--ty) * #{-1 * $translate}),
 				0px
 			);
+
+			@include responsive.tablet {
+				width: 35%;
+			}
 		}
 	}
 </style>
