@@ -8,6 +8,7 @@
 	import { isTablet, windowHeight, windowWidth, mouse } from '$lib/stores/site.svelte';
 
 	import Header from '$lib/components/organisms/header.svelte';
+	import Footer from '$lib/components/organisms/footer.svelte';
 
 	let { children } = $props();
 
@@ -39,6 +40,7 @@
 <div class="page">
 	<Header />
 	{@render children()}
+	<Footer />
 </div>
 
 <style lang="scss">

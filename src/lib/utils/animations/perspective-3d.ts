@@ -13,8 +13,7 @@ import { normalize, round, uniqueID } from '$lib/utils/math';
 export const perspective3d = ({
 	container,
 	elements = [container],
-	proximity = false,
-	proximityLimit = 1.5,
+	proximity = null,
 	onShow,
 	onHide
 }: Perspective3dProps) => {
@@ -52,12 +51,7 @@ export const perspective3d = ({
 			let dx = 0,
 				dy = 0;
 			if (proximity) {
-				if (
-					tx < proximityLimit &&
-					tx > -proximityLimit &&
-					ty < proximityLimit &&
-					ty > -proximityLimit
-				) {
+				if (tx < proximity && tx > -proximity && ty < proximity && ty > -proximity) {
 					dx = tx;
 					dy = ty;
 				}
@@ -90,7 +84,7 @@ export const perspective3d = ({
 	};
 
 	return {
-		init: () => {
+		enable: () => {
 			onResize();
 			eventId = eventManager.add('resize', onResize);
 
@@ -106,7 +100,7 @@ export const perspective3d = ({
 				}
 			});
 		},
-		destroy: () => {
+		disable: () => {
 			if (observerId) {
 				observerId.disconnect();
 			}

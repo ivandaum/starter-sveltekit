@@ -12,7 +12,11 @@
 
 	onMount(() => {
 		const animation = perspective3d({ container: elementRef });
-		animation.init();
+		animation.enable();
+
+		return () => {
+			animation.disable();
+		};
 	});
 </script>
 

@@ -20,8 +20,7 @@ export type Perspective3dProps = {
 	onShow?: () => void;
 	onHide?: () => void;
 	// animation purpose
-	proximity?: boolean;
-	proximityLimit?: number;
+	proximity?: null | number;
 };
 
 export type EventManagerCallback = (event: any | undefined) => void;
