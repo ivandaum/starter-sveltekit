@@ -28,3 +28,26 @@ export const observer = ({
 
 	return observer;
 };
+
+/**
+ * classes is an object :
+ * {
+ * 	'a': true,
+ * 	'b': false,
+ * 	'c': true,
+ * }
+ *
+ * This will send the following array: ['a', 'c']
+ * @returns string[]
+ */
+export const classNames = (classes: { [name: string]: boolean | undefined }) => {
+	const classNames: string[] = [];
+
+	Object.keys(classes).forEach((name) => {
+		if (classes[name]) {
+			classNames.push(name);
+		}
+	});
+
+	return classNames;
+};

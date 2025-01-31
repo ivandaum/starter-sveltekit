@@ -1,7 +1,8 @@
 <script lang="ts">
 	import type { BoxProps } from '$lib/types/component';
 
-	import { classNames } from '$lib/utils/classnames';
+	import { classNames } from '$lib/utils/dom';
+	import { isBool, isString } from '$lib/utils/test';
 
 	let {
 		node = $bindable(),
@@ -14,14 +15,19 @@
 		...props
 	}: BoxProps = $props();
 
-	const classList = $derived([
-		classNames(x, `x-${x}`, 'x-center'),
-		classNames(y, `y-${y}`, 'y-center'),
-		classNames(height, `h-${height}`, 'h-100'),
-		classNames(width, 'w-100'),
-		classNames(column, 'column'),
-		position
-	]);
+	const classList = $derived(
+		classNames({
+			[`x-${x}`]: isString(x),
+			'x-center': isBool(x) && x,
+			[`y-${y}`]: isString(y),
+			'y-center': isBool(y) && y,
+			[`h-${height}`]: isString(height),
+			'h-100': isBool(height) && height,
+			'w-100': width,
+			[position]: true,
+			column
+		})
+	);
 </script>
 
 <svelte:element this={props.type || 'div'} bind:this={node} class={['b', classList, props.class]}>

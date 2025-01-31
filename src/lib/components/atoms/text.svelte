@@ -1,11 +1,17 @@
 <script lang="ts">
 	import type { TextProps } from '$lib/types/component';
 
-	import { classNames } from '$lib/utils/classnames';
+	import { classNames } from '$lib/utils/dom';
+	import { isString } from '$lib/utils/test';
 
 	let { node = $bindable(), align, title, ...props }: TextProps = $props();
 
-	const classList = $derived([classNames(align, `align-${align}`), classNames(title, 'title')]);
+	const classList = $derived(
+		classNames({
+			[`align-${align}`]: isString(align),
+			title
+		})
+	);
 </script>
 
 <svelte:element this={props.type || 'p'} bind:this={node} class={['t', classList, props.class]}>
