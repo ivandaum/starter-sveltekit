@@ -4,52 +4,10 @@ $desktop: 1024px;
 $tablet: 768px;
 $phone: 375px;
 
-// @mixin widescreen-only {
-// 	@media screen and (min-width: $widescreen) and (max-width: calc($maxscreen - 1px)) {
-// 		@content;
-// 	}
-// }
+// helpers
 
-// @mixin desktop-only {
-// 	@media screen and (min-width: $desktop) and (max-width: calc($widescreen - 1px)) {
-// 		@content;
-// 	}
-// }
-
-// @mixin tablet-only {
-// 	@media screen and (min-width: $tablet) and (max-width: ($desktop - 1px)) {
-// 		@content;
-// 	}
-// }
-
-// @mixin mobile-only {
-// 	@media screen and (max-width: calc($tablet - 1px)) {
-// 		@content;
-// 	}
-// }
-
-/** general **/
-
-// @mixin maxscreen {
-// 	@media screen and (min-width: $maxscreen) {
-// 		@content;
-// 	}
-// }
-
-// @mixin widescreen {
-// 	@media screen and (min-width: $widescreen) {
-// 		@content;
-// 	}
-// }
-
-@mixin desktop {
-	@media screen and (min-width: $desktop) {
-		@content;
-	}
-}
-
-@mixin tablet {
-	@media screen and (max-width: calc($desktop - 1px)) {
+@mixin only($min, $max) {
+	@media screen and (min-width: $min) and (max-width: $max) {
 		@content;
 	}
 }
@@ -62,6 +20,20 @@ $phone: 375px;
 
 @mixin up($size) {
 	@media screen and (min-width: $size) {
+		@content;
+	}
+}
+
+// general medias
+
+@mixin desktop {
+	@include up($desktop) {
+		@content;
+	}
+}
+
+@mixin tablet {
+	@include down($desktop - 1px) {
 		@content;
 	}
 }
