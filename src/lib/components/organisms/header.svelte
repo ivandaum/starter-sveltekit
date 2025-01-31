@@ -1,7 +1,7 @@
 <script lang="ts">
 </script>
 
-<div class="header">This is a header</div>
+<div class="header"></div>
 
 <style lang="scss">
 	.header {
