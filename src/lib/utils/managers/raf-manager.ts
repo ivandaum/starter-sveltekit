@@ -1,7 +1,7 @@
 class RAFManager {
 	static instance: RAFManager | undefined;
 
-	isRunning: boolean = false;
+	running: boolean = false;
 	callbacks: Map<string, (timestamp: number) => void> = new Map();
 
 	constructor() {
@@ -12,7 +12,7 @@ class RAFManager {
 		RAFManager.instance = this;
 
 		this.callbacks = new Map();
-		this.isRunning = false;
+		this.running = false;
 
 		this.update = this.update.bind(this);
 	}
@@ -34,24 +34,25 @@ class RAFManager {
 
 	remove(id: string) {
 		this.callbacks.delete(id);
+
 		if (this.callbacks.size === 0) {
 			this.stop();
 		}
 	}
 
 	startIfNeeded() {
-		if (!this.isRunning) {
-			this.isRunning = true;
+		if (!this.running) {
+			this.running = true;
 			requestAnimationFrame(this.update);
 		}
 	}
 
 	stop() {
-		this.isRunning = false;
+		this.running = false;
 	}
 
 	update(timestamp: number) {
-		if (!this.isRunning) return;
+		if (!this.running) return;
 
 		this.callbacks.forEach((callback) => callback(timestamp));
 

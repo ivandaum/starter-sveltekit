@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 
-	import { isTablet } from '$lib/stores/site.svelte';
+	import { tablet } from '$lib/stores/site.svelte';
 
 	import { perspective3d } from '$lib/utils/animations/perspective-3d';
 
@@ -26,7 +26,7 @@
 	<Box class="content" x y position="absolute">
 		<Box bind:node={elementRef} class="block" x y column>
 			{@html SvelteIcon}
-			<Text title={!$isTablet} align="center" class="text">Svelte 5 starter</Text>
+			<Text title={!$tablet} align="center" class="text">Svelte 5 starter</Text>
 		</Box>
 	</Box>
 </div>

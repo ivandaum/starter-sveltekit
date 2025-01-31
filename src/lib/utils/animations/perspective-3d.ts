@@ -7,7 +7,7 @@ import type {
 	EventManagerCallbackID
 } from '$lib/types/utils';
 
-import { mouse, isTablet, windowHeight, windowWidth } from '$lib/stores/site.svelte';
+import { mouse, tablet, windowHeight, windowWidth } from '$lib/stores/site.svelte';
 
 import { EventManager } from '$lib/utils/managers/event-manager';
 import RAFManager from '$lib/utils/managers/raf-manager';
@@ -38,7 +38,7 @@ export const perspective3d = ({
 		let mouseX = get(mouse)[0];
 		let mouseY = get(mouse)[1] + scrollTop;
 
-		if (get(isTablet)) {
+		if (get(tablet)) {
 			mouseX = get(windowWidth) * 0.5;
 			mouseY = scrollTop + get(windowHeight) * 0.5;
 		}

@@ -1,9 +1,26 @@
 import type { ObserverProps } from '$lib/types/utils';
 
+/**
+ * Fire callback once all fonts are loaded
+ */
+export const onFontsReady = (callback: () => void) => {
+	document.fonts.ready.then(() => callback());
+};
+
+/**
+ * Get scroll top
+ *
+ * @returns number
+ */
 export const getScrollTop = () => {
 	return window.scrollY || document.documentElement.scrollTop;
 };
 
+/**
+ * Custom IntersectionObserver
+ *
+ * @return IntersectionObserver
+ */
 export const observer = ({
 	element,
 	onShow,
@@ -38,6 +55,7 @@ export const observer = ({
  * }
  *
  * This will send the following array: ['a', 'c']
+ *
  * @returns string[]
  */
 export const classNames = (classes: { [name: string]: boolean | undefined }) => {

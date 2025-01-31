@@ -1,11 +1,12 @@
 <script lang="ts">
 	import '$lib/styles/css/index.scss';
 
-	import { EventManager } from '$lib/utils/managers/event-manager';
-
 	import { onMount } from 'svelte';
 
-	import { isTablet, windowHeight, windowWidth, mouse } from '$lib/stores/site.svelte';
+	import { tablet, windowHeight, windowWidth, mouse } from '$lib/stores/site.svelte';
+
+	import { EventManager } from '$lib/utils/managers/event-manager';
+	import { isTablet } from '$lib/utils/media-query';
 
 	import Header from '$lib/components/organisms/header.svelte';
 	import Footer from '$lib/components/organisms/footer.svelte';
@@ -13,12 +14,10 @@
 	let { children } = $props();
 
 	const onResize = () => {
-		const height = window.innerHeight;
-		const width = window.innerWidth;
+		$windowWidth = window.innerWidth;
+		$windowHeight = window.innerHeight;
 
-		$isTablet = width < 1024;
-		$windowWidth = width;
-		$windowHeight = height;
+		$tablet = isTablet();
 	};
 
 	const onMouseMove = (event: MouseEvent) => {
