@@ -1,6 +1,11 @@
 import { get } from 'svelte/store';
 
-import type { RectProps, Perspective3dProps, EventManagerCallbackID } from '$lib/types/utils';
+import type {
+	RectProps,
+	Perspective3dProps,
+	Perspective3dReturn,
+	EventManagerCallbackID
+} from '$lib/types/utils';
 
 import { mouse, isTablet, windowHeight, windowWidth } from '$lib/stores/site.svelte';
 
@@ -16,7 +21,7 @@ export const perspective3d = ({
 	proximity = null,
 	onShow,
 	onHide
-}: Perspective3dProps) => {
+}: Perspective3dProps): Perspective3dReturn => {
 	const eventManager = EventManager.getInstance();
 	const rafManager = RAFManager.getInstance();
 

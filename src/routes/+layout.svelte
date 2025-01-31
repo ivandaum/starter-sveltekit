@@ -1,5 +1,5 @@
 <script lang="ts">
-	import '$lib/styles/index.scss';
+	import '$lib/styles/css/index.scss';
 
 	import { EventManager } from '$lib/utils/managers/event-manager';
 
@@ -44,10 +44,10 @@
 </div>
 
 <style lang="scss">
-	@use '$lib/styles/mixins';
+	@use '$lib/styles/functions';
 
 	.page {
-		min-height: mixins.vh(100);
+		min-height: functions.vh(100);
 		width: 100%;
 	}
 </style>

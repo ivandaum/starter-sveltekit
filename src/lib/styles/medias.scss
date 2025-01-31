@@ -2,7 +2,7 @@ $maxscreen: 1600px;
 $widescreen: 1280px;
 $desktop: 1024px;
 $tablet: 768px;
-$mobile: 375px;
+$phone: 375px;
 
 // @mixin widescreen-only {
 // 	@media screen and (min-width: $widescreen) and (max-width: calc($maxscreen - 1px)) {

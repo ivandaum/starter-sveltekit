@@ -16,11 +16,14 @@ export type ObserverProps = {
 export type Perspective3dProps = {
 	container: HTMLElement;
 	elements?: HTMLElement[];
-	// events
 	onShow?: () => void;
 	onHide?: () => void;
-	// animation purpose
 	proximity?: null | number;
+};
+
+export type Perspective3dReturn = {
+	enable: () => void;
+	disable: () => void;
 };
 
 export type EventManagerCallback = (event: any | undefined) => void;

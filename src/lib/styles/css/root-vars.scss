@@ -1,0 +1,29 @@
+@use '$lib/styles/medias.scss';
+
+:root {
+	// fonts
+	--font-family-text: 'DM Sans', arial, sans-serif;
+
+	// font weight
+	--font-weight-regular: 400;
+	--font-weight-bold: 600;
+
+	// font size
+	--font-size-title: 2.4rem;
+	--font-size-text: 1.6rem;
+
+	// colors
+	--color-white: #ffffff;
+	--color-black: #000000;
+
+	// zindex
+	--zindex-base: 1;
+	--zindex-section: 10;
+
+	// medias queries
+	--media-maxscreen: #{medias.$maxscreen};
+	--media-widescreen: #{medias.$widescreen};
+	--media-desktop: #{medias.$desktop};
+	--media-tablet: #{medias.$tablet};
+	--media-phone: #{medias.$phone};
+}

@@ -1,5 +1,11 @@
 @use '../mixins.scss';
-@use '../responsive.scss';
+@use '../medias.scss';
+@use '../functions.scss';
+
+// local styles
+@use './root-vars.scss';
+@use './reset.scss';
+@use './fonts.scss';
 
 html {
 	font-size: 10px;
@@ -13,17 +19,13 @@ body {
 	color: var(--color-black);
 	font-family: var(--font-family-text);
 	font-weight: var(--font-regular);
+	min-height: functions.vh(100);
 
-	@include responsive.tablet {
+	@include medias.tablet {
 		overflow-y: scroll;
 		overflow-x: hidden;
 		width: 100vw;
 	}
-}
-
-html,
-body {
-	overscroll-behavior: none;
 }
 
 strong,
@@ -37,19 +39,19 @@ b {
 }
 
 .hidden-tablet {
-	@include responsive.tablet {
+	@include medias.tablet {
 		display: none !important;
 	}
 }
 
 .hidden-desktop {
-	@include responsive.desktop {
+	@include medias.desktop {
 		display: none !important;
 	}
 }
 
 .break-desktop {
-	@include responsive.desktop {
+	@include medias.desktop {
 		display: block !important;
 	}
 }

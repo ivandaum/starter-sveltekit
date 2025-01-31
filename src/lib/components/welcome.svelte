@@ -33,7 +33,8 @@
 
 <style lang="scss">
 	@use '$lib/styles/mixins';
-	@use '$lib/styles/responsive';
+	@use '$lib/styles/functions';
+	@use '$lib/styles/medias';
 
 	$translate: 0.5rem;
 
@@ -49,17 +50,17 @@
 		color: var(--black);
 
 		.content {
-			height: mixins.vh(100);
+			height: functions.vh(100);
 			width: 100%;
 			overflow: hidden;
 
-			@include responsive.tablet {
+			@include medias.tablet {
 				padding: 2rem;
 			}
 		}
 
 		.block {
-			width: mixins.vh(25);
+			width: functions.vh(25);
 			height: auto;
 			border-radius: 2rem;
 			padding: 5rem 3rem;
@@ -74,7 +75,7 @@
 				)
 				perspective(500px) rotateY(calc(var(--tx) * 5deg)) rotateX(calc(var(--ty) * -5deg));
 
-			@include responsive.tablet {
+			@include medias.tablet {
 				width: 100%;
 				padding: 5rem 2rem;
 			}
@@ -83,7 +84,7 @@
 		.text {
 			margin-top: 3rem;
 
-			@include responsive.tablet {
+			@include medias.tablet {
 				margin-top: 5rem;
 			}
 		}
@@ -98,7 +99,7 @@
 				0px
 			);
 
-			@include responsive.tablet {
+			@include medias.tablet {
 				width: 35%;
 			}
 		}

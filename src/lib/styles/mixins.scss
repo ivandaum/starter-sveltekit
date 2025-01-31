@@ -16,7 +16,3 @@
 	pointer-events: none;
 	cursor: not-allowed;
 }
-
-@function vh($value: 1) {
-	@return #{$value}lvh;
-}
