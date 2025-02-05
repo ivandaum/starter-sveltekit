@@ -6,16 +6,24 @@ export type ComponentProps = {
 };
 
 export type BoxProps = ComponentProps & {
-	height?: 'fit' | boolean;
-	width?: boolean;
-	grid?: boolean;
-	column?: boolean;
 	x?: 'start' | 'center' | 'justify' | 'end' | boolean;
 	y?: 'start' | 'center' | 'justify' | 'end' | boolean;
-	position?: 'relative' | 'absolute' | 'fixed';
+	height?: 'fit' | boolean;
+	// activable props
+	width?: boolean;
+	column?: boolean;
+	absolute?: boolean;
 };
 
 export type TextProps = ComponentProps & {
 	align?: 'left' | 'center' | 'right' | 'justify';
 	title?: boolean;
+};
+
+export type ImageProps = ComponentProps & {
+	alt?: string;
+	srcset?: {
+		src: string;
+		width?: number;
+	}[];
 };

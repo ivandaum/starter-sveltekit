@@ -4,16 +4,7 @@
 	import { classNames } from '$lib/utils/dom';
 	import { isBool, isString } from '$lib/utils/test';
 
-	let {
-		node = $bindable(),
-		x,
-		y,
-		height,
-		width,
-		position = 'relative',
-		column,
-		...props
-	}: BoxProps = $props();
+	let { node = $bindable(), x, y, height, width, absolute, column, ...props }: BoxProps = $props();
 
 	const classList = $derived(
 		classNames({
@@ -24,7 +15,8 @@
 			[`h-${height}`]: isString(height),
 			'h-100': isBool(height) && height,
 			'w-100': width,
-			[position]: true,
+			relative: !absolute,
+			absolute: absolute,
 			column
 		})
 	);

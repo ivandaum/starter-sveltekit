@@ -23,7 +23,7 @@
 </script>
 
 <div class="welcome">
-	<Box class="content" x y position="absolute">
+	<Box class="content" x y absolute>
 		<Box bind:node={elementRef} class="block" x y column>
 			{@html SvelteIcon}
 			<Text title={!$tablet} align="center" class="text">Svelte 5 starter</Text>
